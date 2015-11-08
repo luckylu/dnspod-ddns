@@ -1,0 +1,13 @@
+GEM
+  remote: https://ruby.taobao.org/
+  specs:
+    daemons (1.2.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  daemons
+
+BUNDLED WITH
+   1.10.6
