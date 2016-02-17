@@ -80,7 +80,7 @@ end
 
 pwd = Dir.pwd
 Daemons.run_proc("ddns") do Dir.chdir(pwd)
-  $logger = Logger.new(Time.now.strftime("%Y-%m-%d") + '-ddns.log', 'daily')
+  $logger = Logger.new('ddns.log', 'daily')
   $logger.level = Logger::INFO
   $logger.datetime_format = '%Y-%m-%d %H:%M:%S'
   ddns = Ddns.new
