@@ -2,12 +2,14 @@ GEM
   remote: https://ruby.taobao.org/
   specs:
     daemons (1.2.3)
+    god (0.13.7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   daemons
+  god
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

@@ -1,7 +1,7 @@
 require 'json'
 require 'open-uri'
-require 'daemons'
 require 'logger'
+require 'fileutils'
 require_relative 'dnspod_helper'
 
 class Ddns
@@ -79,28 +79,27 @@ class Ddns
 end
 
 pwd = Dir.pwd
-Daemons.run_proc("ddns") do Dir.chdir(pwd)
-  $logger = Logger.new('ddns.log', 'daily')
-  $logger.level = Logger::INFO
-  $logger.datetime_format = '%Y-%m-%d %H:%M:%S'
-  ddns = Ddns.new
-  ddns.create_domain_or_get_domain_id
-  ddns.remove_record
-  ddns.create_record
+FileUtils.cd(pwd)
+$logger = Logger.new('ddns.log', 'daily')
+$logger.level = Logger::INFO
+$logger.datetime_format = '%Y-%m-%d %H:%M:%S'
+ddns = Ddns.new
+ddns.create_domain_or_get_domain_id
+ddns.remove_record
+ddns.create_record
 
-  before_ip = after_ip = ddns.get_ip
-  loop do
-    if before_ip != after_ip
-      $logger.info {"IP发生改变，开始更新记录"}
-      ddns.modify_record
-      before_ip = ddns.get_ip
-      sleep (60*ddns.conf['time_interval'].to_i)
-      after_ip = ddns.get_ip
-    else
-      $logger.info {"IP没变，无需更新记录"}
-      before_ip = ddns.get_ip
-      sleep (60*ddns.conf['time_interval'].to_i)
-      after_ip = ddns.get_ip
-     end
-  end
+before_ip = after_ip = ddns.get_ip
+loop do
+  if before_ip != after_ip
+    $logger.info {"IP发生改变，开始更新记录"}
+    ddns.modify_record
+    before_ip = ddns.get_ip
+    sleep (60*ddns.conf['time_interval'].to_i)
+    after_ip = ddns.get_ip
+  else
+    $logger.info {"IP没变，无需更新记录"}
+    before_ip = ddns.get_ip
+    sleep (60*ddns.conf['time_interval'].to_i)
+    after_ip = ddns.get_ip
+   end
 end
