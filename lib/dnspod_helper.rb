@@ -5,7 +5,7 @@ require 'json'
 
 module Dnspod
   def initialize
-    conf_path = File.expand_path("../config.json")
+    conf_path = File.expand_path("/home/michael/raspberry/dnspod-ddns/config.json")
     conf_file = File.read(conf_path)
     @conf = JSON.parse(conf_file)
   end
