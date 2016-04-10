@@ -78,7 +78,7 @@ class Ddns
   end
 end
 
-$logger = Logger.new('/home/michael/raspberry/dnspod-ddns/lib/ddns.log', 'daily')
+$logger = Logger.new('/home/michael/raspberry/dnspod-ddns/log/ddns.log', 'daily')
 $logger.level = Logger::INFO
 $logger.datetime_format = '%Y-%m-%d %H:%M:%S'
 ddns = Ddns.new
