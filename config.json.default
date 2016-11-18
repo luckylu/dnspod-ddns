@@ -1,0 +1,6 @@
+{
+	"domain": "aa.com",
+	"sub_domain": "sub", 
+	"time_interval": "填写数字，表示每隔几分钟更新",
+	"token": "id,token"
+}
