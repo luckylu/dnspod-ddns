@@ -2,12 +2,13 @@ require 'json'
 require 'open-uri'
 require 'logger'
 require 'fileutils'
+require 'pathname'
 require_relative 'dnspod_helper'
+require_relative 'path_helper'
 
 class Ddns
   attr_reader :conf
   include Dnspod
-
 
   def get_ip
     @ip = open("http://members.3322.org/dyndns/getip").read
@@ -78,7 +79,7 @@ class Ddns
   end
 end
 
-$logger = Logger.new('/home/michael/raspberry/dnspod-ddns/log/ddns.log', 'daily')
+$logger = Logger.new("#{ProjectPath.get_project_path}log/ddns.log", 'daily')
 $logger.level = Logger::INFO
 $logger.datetime_format = '%Y-%m-%d %H:%M:%S'
 ddns = Ddns.new

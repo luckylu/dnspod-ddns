@@ -2,10 +2,11 @@ require 'uri'
 require 'net/http'
 require 'net/https'
 require 'json'
+require_relative 'path_helper'
 
 module Dnspod
   def initialize
-    conf_path = File.expand_path("/home/michael/raspberry/dnspod-ddns/config.json")
+    conf_path = File.expand_path("#{ProjectPath.get_project_path}config.json")
     conf_file = File.read(conf_path)
     @conf = JSON.parse(conf_file)
   end

@@ -6,5 +6,6 @@
 
 #2. Just run it
 * `cd lib`
-* Excute `ruby ddns.rb start`
+* Excute `god -c ddns.god`
+* we can ask it to run foreground with -D: `god -c ddns.god -D`
 * Check the log file for more information
